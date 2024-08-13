@@ -1,0 +1,341 @@
+type: custom:stack-in-card
+mode: vertical
+card_mod:
+  style: |
+    ha-card {
+      background: linear-gradient(157deg, rgba(246,220,131,1) 0%, rgba(247,139,243,1) 100%) !important;
+    }
+cards:
+  - type: custom:button-card
+    label: |
+      [[[
+        return `<ha-icon icon="mdi:nas"; style="width: 50px; height: 50px; color: black;">
+          </ha-icon> Synology`;
+      ]]]
+    color_type: label-card
+    show_label: true
+    styles:
+      card:
+        - border: none
+        - margin: 0px 0px 0px 0px
+        - padding: 3px 0px 3px 0px
+        - border-bottom: 2px solid gray
+        - align-self: middle
+      label:
+        - font-size: 25px
+        - font-weight: 600
+        - justify-self: start
+        - align-self: middle
+        - padding: 0px 0px 0px 20px
+  - type: entities
+    entities:
+      - entity: sensor.nas_nha_khai_volume_1_volume_used
+        type: custom:multiple-entity-row
+        state_header: HDD 2
+        name: Used
+        icon: mdi:harddisk
+        entities:
+          - entity: sensor.nas_nha_khai_volume_1_volume_used
+            name: HDD 1
+      - entity: sensor.nas_nha_khai_temperature
+        type: custom:multiple-entity-row
+        state_header: Server
+        name: Nhiệt độ
+        entities:
+          - entity: sensor.nas_nha_khai_drive_1_temperature
+            name: HDD 1
+          - entity: sensor.nas_nha_khai_drive_2_temperature
+            name: HDD 2
+      - entity: binary_sensor.nas_nha_khai_security_status
+        icon: mdi:server-security
+        name: Trạng thái
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 158px !important;
+            border: none !important;
+            margin-top: -20px !important;
+            margin-right: 10px !important;
+            background: none !important;
+            color: black !important;
+            font-weight: 550 !important;
+          }
+          :host {
+            --paper-item-icon-color: rgba(0, 0, 0, 1) !important;
+            --secondary-text-color: gray !important;
+          }
+  - type: custom:stack-in-card
+    mode: horizontal
+    cards:
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: custom:apexcharts-card
+            chart_type: radialBar
+            series:
+              - entity: sensor.nas_nha_khai_cpu_utilization_total
+                color: rgb(76, 175, 80)
+                max: 100
+                show:
+                  legend_value: false
+            apex_config:
+              plotOptions:
+                radialBar:
+                  offsetY: 0
+                  startAngle: -108
+                  endAngle: 108
+                  hollow:
+                    size: 70%
+                  dataLabels:
+                    name:
+                      show: false
+                    value:
+                      show: false
+                  track:
+                    strokeWidth: 80%
+                    margin: 0
+              legend:
+                show: false
+              chart:
+                height: 140px
+            card_mod:
+              style: |
+                ha-card {
+                  border: none;
+                  background: none !important;
+                }
+          - type: custom:mushroom-entity-card
+            entity: sensor.nas_nha_khai_cpu_utilization_total
+            primary_info: name
+            secondary_info: state
+            name: CPU
+            icon_color: green
+            layout: vertical
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --card-secondary-font-weight: 600 !important;
+                    --card-primary-font-size: 10px !important;
+                    --card-secondary-font-size: 15px !important;
+                    --card-primary-color: gray !important;
+                    --card-secondary-color: rgba(0,0,0,1) !important;
+                  }
+                  ha-card {
+                    top: -68px !important;
+                    left: 0.5px !important;
+                    box-shadow: none !important;
+                    background: none !important;
+                    border: none !important;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 132px !important;
+              border: none !important;
+              background: none !important;
+            }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: custom:apexcharts-card
+            chart_type: radialBar
+            series:
+              - entity: sensor.nas_nha_khai_memory_usage_real
+                color: rgb(33, 150, 243)
+                max: 100
+                show:
+                  legend_value: false
+            apex_config:
+              plotOptions:
+                radialBar:
+                  offsetY: 0
+                  startAngle: -108
+                  endAngle: 108
+                  hollow:
+                    size: 70%
+                  dataLabels:
+                    name:
+                      show: false
+                    value:
+                      show: false
+                  track:
+                    strokeWidth: 80%
+                    margin: 0
+              legend:
+                show: false
+              chart:
+                height: 140px
+            card_mod:
+              style: |
+                ha-card {
+                  border: none !important;
+                  background: none !important;
+                }
+          - type: custom:mushroom-entity-card
+            entity: sensor.nas_nha_khai_memory_usage_real
+            primary_info: name
+            secondary_info: state
+            name: RAM
+            icon_color: blue
+            layout: vertical
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --card-secondary-font-weight: 600 !important;
+                    --card-primary-font-size: 10px !important;
+                    --card-secondary-font-size: 15px !important;
+                    --card-primary-color: gray !important;
+                    --card-secondary-color: rgba(0,0,0,1) !important;
+                  }
+                  ha-card {
+                    top: -68px !important;
+                    left: 0.5px !important;
+                    box-shadow: none !important;
+                    background: none !important;
+                    border: none !important;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 132px !important;
+              border: none !important;
+              background: none !important;
+            }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: custom:apexcharts-card
+            chart_type: radialBar
+            series:
+              - entity: sensor.nas_nha_khai_volume_1_average_disk_temp
+                color: rgb(255, 87, 34)
+                max: 100
+                show:
+                  legend_value: false
+            apex_config:
+              plotOptions:
+                radialBar:
+                  offsetY: 0
+                  startAngle: -108
+                  endAngle: 108
+                  hollow:
+                    size: 70%
+                  dataLabels:
+                    name:
+                      show: false
+                    value:
+                      show: false
+                  track:
+                    strokeWidth: 80%
+                    margin: 0
+              legend:
+                show: false
+              chart:
+                height: 140px
+            card_mod:
+              style: |
+                ha-card {
+                  border: none !important;
+                  background: none !important;
+                }
+          - type: custom:mushroom-entity-card
+            entity: sensor.nas_nha_khai_volume_1_average_disk_temp
+            primary_info: name
+            secondary_info: state
+            name: Disk
+            icon_color: deep-orange
+            layout: vertical
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --card-secondary-font-weight: 600 !important;
+                    --card-primary-font-size: 10px !important;
+                    --card-secondary-font-size: 15px !important;
+                    --card-primary-color: gray !important;
+                    --card-secondary-color: rgba(0,0,0,1) !important;
+                  }
+                  ha-card {
+                    top: -68px !important;
+                    left: 0.5px !important;
+                    box-shadow: none !important;
+                    background: none !important;
+                    border: none !important;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 132px !important;
+              border: none !important;
+              background: none !important;
+            }
+    columns: 3
+    card_mod:
+      style: |
+        ha-card {
+          height: 132px !important;
+          border-top: 2px solid gray !important;
+          border-bottom: 2px solid gray !important;
+          border-radius: 0% !important; 
+          background: none !important;
+        }
+  - type: custom:stack-in-card
+    mode: horizontal
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          background: none !important;
+        }
+    cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.system_monitor_network_throughput_in_enp3s0
+        primary_info: state
+        secondary_info: name
+        name: Downloads
+        icon_color: orange
+        card_mod:
+          style:
+            .: |
+              :host {
+                --card-primary-font-weight: 600 !important;
+                --card-primary-font-size: 15px !important;
+                --card-secondary-font-size: 10px !important;
+                --card-primary-color: rgba(0,0,0,1) !important;
+                --card-secondary-color: gray !important;
+              }
+              ha-card {
+                margin-left: 30px !important;
+                margin-right: auto !important;
+                margin-bottom: 2px !important;
+                box-shadow: none !important;
+                background: none !important;
+                border: none !important;
+              }
+      - type: custom:mushroom-entity-card
+        entity: sensor.system_monitor_network_throughput_out_enp3s0
+        primary_info: state
+        secondary_info: name
+        name: Upload
+        icon_color: blue
+        card_mod:
+          style:
+            .: |
+              :host {
+                --card-primary-font-weight: 600 !important;
+                --card-primary-font-size: 15px !important;
+                --card-secondary-font-size: 10px !important;
+                --card-primary-color: rgba(0,0,0,1) !important;
+                --card-secondary-color: gray !important;
+              }
+              ha-card {
+                margin-left: 30px !important;
+                margin-right: auto !important;
+                margin-bottom: 2px !important;
+                box-shadow: none !important;
+                background: none !important;
+                border: none !important;
+              }
